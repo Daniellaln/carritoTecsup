@@ -27,6 +27,7 @@ import androidx.compose.ui.unit.dp
 import com.leon.lab04carritotecsup_leon.data.Producto
 import com.leon.lab04carritotecsup_leon.ui.components.BarraSuperior
 import com.leon.lab04carritotecsup_leon.ui.components.FormularioProducto
+import com.leon.lab04carritotecsup_leon.ui.components.TarjetaProducto
 import com.leon.lab04carritotecsup_leon.ui.theme.Lab04CarritoTecsupLeonTheme
 
 @Composable
@@ -76,7 +77,7 @@ fun PantallaCarrito() {
             Text(text = "Productos: ${productos.size}")
             Spacer(modifier = Modifier.height(8.dp))
 
-            // Avance: lista desplazable (luego usará TarjetaProducto)
+            // Lista desplazable con tarjetas
             LazyColumn(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -84,7 +85,10 @@ fun PantallaCarrito() {
                 verticalArrangement = Arrangement.spacedBy(12.dp)
             ) {
                 items(productos) { producto ->
-                    Text(text = "${producto.nombre} - ${producto.precio} x ${producto.cantidad}")
+                    TarjetaProducto(
+                        producto = producto,
+                        onEliminar = { productos.remove(producto) }
+                    )
                 }
             }
         }
