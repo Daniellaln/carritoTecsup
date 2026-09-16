@@ -3,9 +3,13 @@ package com.leon.lab04carritotecsup_leon.ui.screens
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
@@ -69,8 +73,20 @@ fun PantallaCarrito() {
             HorizontalDivider(color = MaterialTheme.colorScheme.outline)
             Spacer(modifier = Modifier.height(12.dp))
 
-            // Prueba temporal: el número debe aumentar al agregar
             Text(text = "Productos: ${productos.size}")
+            Spacer(modifier = Modifier.height(8.dp))
+
+            // Avance: lista desplazable (luego usará TarjetaProducto)
+            LazyColumn(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .weight(1f),
+                verticalArrangement = Arrangement.spacedBy(12.dp)
+            ) {
+                items(productos) { producto ->
+                    Text(text = "${producto.nombre} - ${producto.precio} x ${producto.cantidad}")
+                }
+            }
         }
     }
 }
